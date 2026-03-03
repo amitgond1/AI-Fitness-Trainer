@@ -1,0 +1,11 @@
+:root {
+  --color-primary: #f97316;
+  --color-secondary: #14b8a6;
+  --color-accent: #38bdf8;
+}
+
+html.dark {
+  --color-primary: #fb923c;
+  --color-secondary: #2dd4bf;
+  --color-accent: #67e8f9;
+}

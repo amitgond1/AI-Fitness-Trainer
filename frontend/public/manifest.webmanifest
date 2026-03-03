@@ -1,0 +1,9 @@
+{
+  "name": "AI Fitness Trainer",
+  "short_name": "AIFit",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050816",
+  "theme_color": "#4F46E5",
+  "icons": []
+}

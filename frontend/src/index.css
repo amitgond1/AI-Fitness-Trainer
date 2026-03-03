@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-start: #fff8f1;
+  --bg-mid: #ffe6d7;
+  --bg-end: #effcf8;
+  --text-main: #112031;
+  --text-muted: #4a5568;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(238, 120, 76, 0.24);
+  --btn-start: #f97316;
+  --btn-end: #14b8a6;
+  --focus-ring: rgba(20, 184, 166, 0.38);
+  --hero-ring: rgba(249, 115, 22, 0.22);
+}
+
+html.dark {
+  color-scheme: dark;
+  --bg-start: #081221;
+  --bg-mid: #111f34;
+  --bg-end: #071723;
+  --text-main: #f2f7ff;
+  --text-muted: #a9b7cc;
+  --card-bg: rgba(12, 22, 39, 0.72);
+  --card-border: rgba(45, 212, 191, 0.2);
+  --btn-start: #f97316;
+  --btn-end: #14b8a6;
+  --focus-ring: rgba(45, 212, 191, 0.4);
+  --hero-ring: rgba(45, 212, 191, 0.24);
+}
+
+body {
+  font-family: "Sora", "Poppins", "Segoe UI", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-main);
+  background: radial-gradient(circle at 16% 18%, rgba(249, 115, 22, 0.14), transparent 40%),
+    radial-gradient(circle at 88% 0%, rgba(20, 184, 166, 0.18), transparent 36%),
+    linear-gradient(145deg, var(--bg-start) 0%, var(--bg-mid) 52%, var(--bg-end) 100%);
+  background-size: 120% 120%;
+  animation: driftBg 18s ease-in-out infinite alternate;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 35px rgba(10, 20, 36, 0.14);
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hero-ring);
+  box-shadow: 0 16px 38px rgba(8, 16, 28, 0.2);
+}
+
+.gradient-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, var(--btn-start) 0%, var(--btn-end) 100%);
+  box-shadow: 0 12px 26px rgba(20, 184, 166, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.gradient-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.35) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.52s ease;
+  z-index: -1;
+}
+
+.gradient-btn:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.1);
+  box-shadow: 0 16px 30px rgba(20, 184, 166, 0.34);
+}
+
+.gradient-btn:hover::after {
+  transform: translateX(120%);
+}
+
+.auth-bg {
+  background-image: radial-gradient(circle at 8% 14%, rgba(249, 115, 22, 0.22), transparent 36%),
+    radial-gradient(circle at 92% 12%, rgba(20, 184, 166, 0.2), transparent 36%),
+    linear-gradient(145deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+}
+
+.bg-mesh {
+  background-image: radial-gradient(circle at 12% 12%, rgba(249, 115, 22, 0.22), transparent 42%),
+    radial-gradient(circle at 86% 2%, rgba(20, 184, 166, 0.22), transparent 36%),
+    radial-gradient(circle at 90% 84%, rgba(56, 189, 248, 0.14), transparent 34%),
+    linear-gradient(145deg, var(--bg-start) 0%, var(--bg-mid) 52%, var(--bg-end) 100%);
+}
+
+.float-orb {
+  animation: pulseOrb 4.2s ease-in-out infinite;
+}
+
+.reveal-up {
+  animation: revealUp 0.55s ease both;
+}
+
+.stagger-children > * {
+  animation: revealUp 0.55s ease both;
+}
+
+.stagger-children > *:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.stagger-children > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.stagger-children > *:nth-child(4) {
+  animation-delay: 170ms;
+}
+
+.stagger-children > *:nth-child(5) {
+  animation-delay: 220ms;
+}
+
+.stagger-children > *:nth-child(6) {
+  animation-delay: 270ms;
+}
+
+.section-title {
+  @apply text-2xl md:text-3xl font-bold tracking-tight;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@keyframes driftBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes pulseOrb {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.04);
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    background-size: 160% 160%;
+  }
+
+  .glass-card {
+    box-shadow: 0 10px 24px rgba(7, 16, 30, 0.16);
+  }
+}
