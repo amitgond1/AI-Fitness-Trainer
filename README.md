@@ -4,16 +4,6 @@ Full-stack AI fitness application with authentication, workout tracking, analyti
 
 ## Screenshots
 
-Add your own screenshots to:
-
-`assets/screenshots/`
-
-Expected file names:
-
-- `landing.png`
-- `workout.png`
-- `library.png`
-
 ### Landing Page
 ![Landing](assets/screenshots/landing.png)
 
