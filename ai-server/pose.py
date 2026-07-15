@@ -59,6 +59,8 @@ def _ensure_session(session_id):
     return SESSION_STORE[session_id]
 
 
+
+
 def reset_session(session_id: str):
     return SESSION_STORE.pop(session_id, None) is not None
 
@@ -298,6 +300,7 @@ def analyze_pose_session(session_id: str, exercise: str, landmarks: List[Dict]):
 
     result["skeleton"] = {"connections": CONNECTIONS, "points": landmarks}
     return result
+
 
 
 def detect_landmarks_from_image(image_bytes: bytes):

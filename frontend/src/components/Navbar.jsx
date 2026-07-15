@@ -10,7 +10,7 @@ const linkClass = ({ isActive }) =>
       : "text-slate-200 hover:bg-white/10 hover:text-white"
   }`;
 
-const navItems = ["dashboard", "workout", "library", "analytics", "leaderboard", "profile", "settings"];
+const navItems = ["dashboard", "tracker", "workout", "progress", "analytics", "leaderboard", "profile", "settings"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -35,7 +35,7 @@ const Navbar = () => {
 
         <button
           type="button"
-          className="rounded-xl border border-white/20 bg-slate-900/50 p-2 text-slate-100 md:hidden"
+          className="rounded-xl border border-white/20 bg-slate-900/50 p-2 text-slate-100 lg:hidden"
           onClick={() => setOpen((prev) => !prev)}
           aria-expanded={open}
           aria-label="Toggle menu"
@@ -43,7 +43,7 @@ const Navbar = () => {
           {open ? <FaTimes /> : <FaBars />}
         </button>
 
-        <nav className="hidden items-center gap-1 rounded-2xl border border-white/15 bg-slate-900/45 p-1.5 md:flex">
+        <nav className="hidden items-center gap-0.5 rounded-2xl border border-white/15 bg-slate-900/45 p-1.5 lg:flex">
           {navItems.map((item) => (
             <NavLink key={item} to={`/${item}`} className={linkClass}>
               {item[0].toUpperCase() + item.slice(1)}
@@ -60,7 +60,7 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <nav className="reveal-up max-h-[72vh] space-y-2 overflow-y-auto border-t border-white/15 bg-slate-950/92 px-3 py-3 md:hidden">
+        <nav className="reveal-up max-h-[72vh] space-y-2 overflow-y-auto border-t border-white/15 bg-slate-950/92 px-3 py-3 lg:hidden">
           {navItems.map((item) => (
             <NavLink key={item} to={`/${item}`} className={({ isActive }) => `${linkClass({ isActive })} block w-full px-4 py-3`} onClick={() => setOpen(false)}>
               {item[0].toUpperCase() + item.slice(1)}

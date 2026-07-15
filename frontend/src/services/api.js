@@ -81,7 +81,11 @@ export const userApi = {
 export const workoutApi = {
   createWorkout: (data) => api.post("/workout", data),
   getWorkouts: (params = {}) => api.get("/workouts", { params }),
-  getAnalytics: () => api.get("/workouts/analytics")
+  getAnalytics: () => api.get("/workouts/analytics"),
+  deleteWorkout: (id) => api.delete(`/workouts/${id}`),
+  getMonthlyReport: (month) => api.get("/reports/monthly", { params: { month } }),
+  getTrainingPlan: () => api.get("/training-plan"),
+  saveTrainingPlan: (data) => api.put("/training-plan", data)
 };
 
 export const aiApiClient = {
@@ -92,6 +96,13 @@ export const aiApiClient = {
 
 export const leaderboardApi = {
   getLeaderboard: () => api.get("/leaderboard")
+};
+
+export const progressApi = {
+  createMetric: (data) => api.post("/body-metrics", data),
+  getMetrics: (limit = 90) => api.get("/body-metrics", { params: { limit } }),
+  deleteMetric: (id) => api.delete(`/body-metrics/${id}`),
+  getOverview: () => api.get("/progress/overview")
 };
 
 export default api;

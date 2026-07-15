@@ -1,21 +1,26 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import DashboardPage from "./pages/DashboardPage";
-import WorkoutPage from "./pages/WorkoutPage";
-import LibraryPage from "./pages/LibraryPage";
-import AnalyticsPage from "./pages/AnalyticsPage";
-import ProfilePage from "./pages/ProfilePage";
-import SettingsPage from "./pages/SettingsPage";
-import LeaderboardPage from "./pages/LeaderboardPage";
 import AppShell from "./components/AppShell";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Loader from "./components/Loader";
+
+const LandingPage = lazy(() => import("./pages/LandingPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const SignupPage = lazy(() => import("./pages/SignupPage"));
+const ForgotPasswordPage = lazy(() => import("./pages/ForgotPasswordPage"));
+const ResetPasswordPage = lazy(() => import("./pages/ResetPasswordPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const WorkoutPage = lazy(() => import("./pages/WorkoutPage"));
+const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage"));
+const LeaderboardPage = lazy(() => import("./pages/LeaderboardPage"));
+const TrackerPage = lazy(() => import("./pages/TrackerPage"));
+const ProgressPage = lazy(() => import("./pages/ProgressPage"));
 
 function App() {
   return (
+    <Suspense fallback={<Loader text="Loading your fitness space..." />}>
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -32,7 +37,8 @@ function App() {
       >
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/workout" element={<WorkoutPage />} />
-        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/tracker" element={<TrackerPage />} />
+        <Route path="/progress" element={<ProgressPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -41,6 +47,7 @@ function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </Suspense>
   );
 }
 

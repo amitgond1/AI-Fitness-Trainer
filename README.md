@@ -10,9 +10,6 @@ Full-stack AI fitness application with authentication, workout tracking, analyti
 ### Workout View
 ![Workout](assets/screenshots/workout.png)
 
-### Exercise Library
-![Library](assets/screenshots/library.png)
-
 ## Tech Stack
 
 - Frontend: React (Vite), Tailwind CSS, Framer Motion, Recharts, MediaPipe JS

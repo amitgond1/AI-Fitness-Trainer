@@ -54,6 +54,7 @@ app.use("/api", limiter);
 app.use("/api", require("./routes/authRoutes"));
 app.use("/api", require("./routes/userRoutes"));
 app.use("/api", require("./routes/workoutRoutes"));
+app.use("/api", require("./routes/progressRoutes"));
 app.use("/api", require("./routes/aiRoutes"));
 app.use("/api", require("./routes/leaderboardRoutes"));
 

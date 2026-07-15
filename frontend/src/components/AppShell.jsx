@@ -19,7 +19,7 @@ const AppShell = () => {
   return (
     <div className="min-h-screen bg-mesh text-slate-100">
       <Navbar />
-      <main className="mx-auto max-w-7xl px-3 py-5 sm:px-4 md:px-8 md:py-6">
+      <main className="mx-auto max-w-7xl px-3 py-5 pb-24 sm:px-4 md:px-8 md:py-6 lg:pb-8">
         <Outlet />
       </main>
     </div>

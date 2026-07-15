@@ -140,6 +140,18 @@ body {
   @apply text-2xl md:text-3xl font-bold tracking-tight;
 }
 
+.field-label {
+  @apply flex flex-col gap-2 text-xs font-semibold uppercase tracking-wide text-slate-300;
+}
+
+.input-control {
+  @apply w-full rounded-xl border border-white/15 bg-slate-950/60 px-3 py-3 text-sm font-normal normal-case tracking-normal text-white placeholder:text-slate-500;
+}
+
+.input-control option {
+  background: #0f172a;
+}
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -186,5 +198,26 @@ textarea:focus-visible {
 
   .glass-card {
     box-shadow: 0 10px 24px rgba(7, 16, 30, 0.16);
+  }
+}
+
+@media print {
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  body,
+  .bg-mesh {
+    background: #fff !important;
+    color: #0f172a !important;
+  }
+
+  .glass-card {
+    break-inside: avoid;
+    background: #fff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
   }
 }

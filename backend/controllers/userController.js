@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Workout = require("../models/Workout");
+const TrainingPlan = require("../models/TrainingPlan");
+const BodyMetric = require("../models/BodyMetric");
 
 const pickDefinedFields = (obj, keys) => {
   return keys.reduce((acc, key) => {
@@ -45,6 +47,7 @@ const updateProfile = async (req, res, next) => {
   }
 };
 
+
 const changePassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -77,6 +80,8 @@ const changePassword = async (req, res, next) => {
 const deleteAccount = async (req, res, next) => {
   try {
     await Workout.deleteMany({ userId: req.user.id });
+    await TrainingPlan.deleteMany({ userId: req.user.id });
+    await BodyMetric.deleteMany({ userId: req.user.id });
     await User.findByIdAndDelete(req.user.id);
 
     return res.json({ message: "Account deleted." });
@@ -92,16 +97,22 @@ const getStats = async (req, res, next) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    const workouts = await Workout.find({ userId: req.user.id }).sort({ date: -1 }).limit(30);
-
-    const totalCalories = workouts.reduce((sum, w) => sum + Number(w.calories || 0), 0);
-    const totalDuration = workouts.reduce((sum, w) => sum + Number(w.duration || 0), 0);
+    const [totals, workouts] = await Promise.all([
+      Workout.aggregate([
+        { $match: { userId: user._id } },
+        { $group: { _id: null, totalCalories: { $sum: "$calories" }, totalDuration: { $sum: "$duration" }, totalDistanceKm: { $sum: "$distanceKm" }, totalWorkouts: { $sum: 1 } } }
+      ]),
+      Workout.find({ userId: req.user.id }).sort({ date: -1 }).limit(30)
+    ]);
+    const total = totals[0] || {};
 
     return res.json({
       streak: user.streak,
       achievements: user.achievements,
-      totalCalories,
-      totalDuration,
+      totalCalories: total.totalCalories || 0,
+      totalDuration: total.totalDuration || 0,
+      totalDistanceKm: total.totalDistanceKm || 0,
+      totalWorkouts: total.totalWorkouts || 0,
       recentWorkouts: workouts
     });
   } catch (error) {
